@@ -17,23 +17,23 @@ var items = ["Upgrade Project Planning",
 			"LiveEngage Console Training (Remote)",
 			"Post Launch Review Meeting",
 			"Post Launch Support",
-			"Project Status Meetings", "Skill setup", "Campaign setup", "Engagement Set Up", "Live Engage Console Training", "Agent Training (Remote)", "Internal Testing", "External Testing Meetings (One hour for 2 people)", "Scheduled Project Meetings", "Post Launch Meetings", "A/B Test"
+			"Project Status Meetings", "Skill setup", "Campaign setup", "Engagement Set Up", "Live Engage Console Training", "Agent Training (Remote)", "Internal Testing", "External Testing Meetings (One hour for 2 people)", "Scheduled Project Meetings", "Post Launch Meetings (should at least be 2)", "A/B Test", "PIT"
 			];
 var mins = [30,
-			3,
-			15,
+			20,
+			20,
 			60,
 			60,
-			30,
-			3,
-			7,
 			60,
-			5,
-			120,
+			20,
+			20,
 			60,
 			60,
-			120,
-			60, 3, 3, 15, 60, 180, 60, 120, 60, 60, 300
+			180,
+			60,
+			60,
+			300,
+			30, 10, 30, 30, 60, 180, 60, 60, 30, 60, 300, 300
 			];
 
 var sc = [1,0,0,1,1,1, -1, -1, 1, -1, 1, 1, 1, 1, 3
@@ -71,7 +71,7 @@ function initTable(dataArray) {
 			data.push([dataArray[i-1].item,dataArray[i-1].minutes,scope, formula,"", ""]);
 		}
 		data.push(["", "", "Total", "=SUM(D2:D"+ (len+1) + ")", 250, "=D"+max+"*E"+max+""]);
-		data.push(["Project Management", "", "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
+		data.push(["Extraneous Project Management", 300, "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
 		data.push(["", "", "", "", "", ""]);
 		data.push(["", "", "Project Quote", "=D"+(max+1), "", "=F"+(max+1)]);
 		data.push(["","","","","",""]);
@@ -97,8 +97,8 @@ function initTable(dataArray) {
 			}
 		}
 		//len = len - 1;
-		data.push(["", "", "Total", "=SUM(D23:D"+ (len+4) + ")", 250, "=D"+max+"*E"+max+""]);
-		data.push(["Contingency", "", "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
+		data.push(["", "", "Total", "=SUM(D23:D"+ (len+1) + ")+ SUM(D33:D34)", 250, "=D"+max+"*E"+max+""]);
+		data.push(["Extraneous Project Management", "", "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
 		data.push(["", "", "", "", "", ""]);
 		data.push(["", "", "Project Quote", "=D"+(max+1), "", "=F"+(max+1)]);
 		hot = new Handsontable($('#estimator')[0], {
@@ -114,6 +114,7 @@ function initTable(dataArray) {
 	hot.updateSettings({
       
 	beforeChange: function (changes, source) {
+	    //alert(changes[0][0]);
 		if ((changes[0][0] > 0) && (changes[0][0] <= len + 5) && (changes[0][1] == 2) ) {
 			//alert('valid');
 		  if(changes[0][3].match(/^\d+$/) == null) {
@@ -121,11 +122,24 @@ function initTable(dataArray) {
           changes[0][3] = changes[0][2];
 		  }
         }
+		else if (((changes[0][0] == 17) || (changes[0][0] == 35)) && (changes[0][1] == 4) ) {
+			//alert('valid');
+		  var change = changes[0][3];
+		  if((changes[0][3].match(/^\s*(?=.*[1-9])0{0,1}(?:\.\d{1,2})?\s*$/) == null) && (changes[0][3].match(/^\s*(1\.0)|(1\.00)\s*$/) == null)) {
+		  //alert(changes[0][3].match(/^\d+$/));
+			changes[0][3] = changes[0][2];
+		  }
+		  if(change  .match(/^\s*1\s*$/) != null) {
+			changes[0][3] = '1.00';
+		  
+		  }
+        }
 		else {
 		
 			changes[0][3] = changes[0][2];
 		
 		}
+		
     },
 	afterChange: function (changes, source) {
 			updateSOW();
@@ -147,7 +161,14 @@ function updateSOW() {
 		$('#tcalls')[0].selectedIndex = hot.getDataAtCell(28,2);
 		$('#numpm')[0].selectedIndex = hot.getDataAtCell(29,2);
 		$('#numplm')[0].selectedIndex = hot.getDataAtCell(30,2);
-		$('#hrs')[0].value = getTotalHRS(22, 32);
+		if(parseInt(hot.getDataAtCell(33,2)) > 0) {
+			$('#pit')[0].selectedIndex = '1';
+		}
+		else {
+			$('#pit')[0].selectedIndex = '0';
+		}
+		$('#hrs')[0].value = getTotalHRS(22, 33);
+		
 	
 	}
 	else {
@@ -157,6 +178,7 @@ function updateSOW() {
 		$('#numpm')[0].selectedIndex = hot.getDataAtCell(15,2);
 		$('#numplm')[0].selectedIndex = hot.getDataAtCell(13,2);
 		$('#hrs')[0].value = getTotalHRS(1, 15);
+		
 	}
 	/*
 	$('#numskill')[0].selectedIndex = hot.getDataAtCell(1,2);

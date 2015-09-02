@@ -639,7 +639,9 @@ function iType() {
 		newexp();
 	
 	}
+	updateSOW();
 	$('.selectpicker').selectpicker('refresh');
+	
 
 }
 
