@@ -1,0 +1,195 @@
+<html>
+   <head>
+      <script type="text/javascript" src="sections2.js"></script>
+   </head>
+   <body>
+      <table>
+         <tr>
+            <td>
+               Package Type
+            </td>
+            <td>
+               <select id="package">
+                  <option value="Basic">Basic</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+               </select>
+            </td>
+         </tr>
+		 <tr><td><b>Channels</b></td></tr>
+		 <tr><td>Chat</td>
+		 <td><input type="checkbox" id="chat" checked></td></tr>
+		 <tr><td>Voice</td>
+		 <td><input type="checkbox" id="voice"></td></tr>
+		 <tr><td>Mobile</td>
+		 <td><input type="checkbox" id="mobile"></td></tr>
+		 <tr><td></td><td>
+		 <input type="checkbox" id="ios"> IOS Native App
+		 <br><input type="checkbox" id="android"> Android Native App	
+		 <br><input type="checkbox" id="resp"> Responsive/m.site
+		 </td>
+		 </tr>
+		 <tr><td>Content</td>
+		 <td><input type="checkbox" id="content"></td></tr>
+		 <tr><td>Content: Number of offers</td>
+		 <td><input type="text" id="offers"></td></tr>
+		 <tr><td><b>Company Website</b></td></tr>
+         <tr>
+            <td>Number of Domains</td>
+            <td>
+               <input id="domain" type="text" value="1"></input>
+			   <br><button onclick="generateBoxes();">Click for multiple domains</button>
+            </td>
+         </tr>
+         <tr>
+            <td>LOB</td>
+            <td><input id="lob0" type="text" value="sales"></input>
+			
+         </tr>
+         <tr>
+            <td>Domain url</td>
+            <td><input id="domurl0" type="text" value=".com"></input>
+			
+         </tr>
+		 <tr><td><b>Multiple Domains LOBS and URLs</b></td></tr>
+		 <tr><td id = "eboxes1"></td><td id = "eboxes2"></tr>
+		
+		 <tr><td><b>Code Package</b></td></tr>
+         <tr>
+			<td>DRD?<br>Code Package?</td>
+			<td>
+			   <select id="drd">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+               </select><br>
+			   <select id="cp">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+               </select>
+			 </td>
+		</tr>
+		<tr><td><b>Capabilities</b></td></tr>
+		<tr>
+			<td>Number of LOB</td>
+			<td><input id="numlob" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Report Targets</td>
+			<td><input id="reptargets" type="text" value="3"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Scorecards</td>
+			<td><input id="scards" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Skills</td>
+			<td><input id="numskill" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Visitor profiles</td>
+			<td><input id="numvispro" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Rules</td>
+			<td><input id="busrules" type="text" value="10"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Dynamic Buttons</td>
+			<td><input id="dbs" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Invitations</td>
+			<td><input id="invites" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Windows</td>
+			<td><input id="numwindows" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Survey sets</td>
+			<td><input id="numsurveys" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Canned Response Sets</td>
+			<td><input id="numcanned" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of System Msg Sets</td>
+			<td><input id="numsysmsg" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>PIT?</td>
+			<td>
+			<select id="pit">
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+            </select>
+			</td>
+		</tr>
+		<tr><td><b>Training</b></td></tr>
+		<tr>
+			<td>Training Type</td>
+			<td>
+			<select id="train">
+					<option value="remote">remote</option>
+					<option value="sura">sura</option>
+					<option value="none">none</option>
+            </select>
+			</td>
+		</tr>
+		<tr>
+			<td>Number of Trainings</td>
+			<td><input id="numtrain" type="text" value="1"></input></td>
+		</tr>
+		<tr><td><b>Project Management</b></td></tr>
+		<tr>
+			<td>Number of Weekly Project Meetings</td>
+			<td><input id="numpm" type="text" value="1"></input></td>
+		</tr>
+		<tr><td><b>Optimization</b></td></tr>
+		<tr>
+			<td>Number of Post launch meetings</td>
+			<td><input id="numplm" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Scorecard Reviews</td>
+			<td><input id="numscr" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Staffing Calculator Reviews</td>
+			<td><input id="numstaffr" type="text" value="1"></input></td>
+		</tr>
+		<tr>
+			<td>Number of Agent Effectivness Reviews</td>
+			<td><input id="numaer" type="text" value="1"></input></td>
+		</tr>
+		<tr><td><b>Hours</b></td></tr>
+		<tr>
+			<td>Number of Hours</td>
+			<td><input id="hrs" type="text" value="50"></input></td>
+		</tr>
+      </table>
+      <button onclick="makeSOW();">Generate</button><button onclick="wordSOW();">Word</button>
+      <br>
+      <br>
+      <div id="page-content">
+         <section id="tarea" contenteditable="true">
+            <b>Generated SOW</b>
+         </section>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+      <script src="jquery-2.1.1.min.js"></script>
+      <script src="FileSaver.js"></script>
+      <script src="jquery.wordexport.js"></script>
+	  <style>
+		#tarea	{
+			position: absolute;
+			top: 30px;
+			right: 200px;
+			overflow-y: scroll;
+			height:800px;
+			width: 800px;
+		}
+	  </style>
+   </body>
+</html>

@@ -1,0 +1,419 @@
+<html>
+   <head>
+   <title>SOW Generator</title>
+   <link rel="shortcut icon" href="http://www.liveperson.com/sites/default/files/LP_LOGO_0_0.png" type="image/png">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0;">
+      <script type="text/javascript" src="sections.js"></script>
+	  <link rel="stylesheet" href="bootstrap.min.css"
+	media="all" />
+	<link rel="stylesheet" href="bootstrap-select.min.css"/>
+	<link rel="stylesheet" href="sb-admin.css"/>
+	<style>
+	.navbar-inverse {
+			background-color: #f68a1f;
+			border-color: white;
+		}
+		
+		.side-nav li a:hover,
+		.side-nav li a:focus {
+        outline: none;
+        background-color: grey !important;
+		}
+		.side-nav {
+		
+			background-color: #f68a1f;
+			width: 400px;
+			max-height: 95%;
+		}
+		.navbar-inverse .navbar-nav>li>a {
+			color: white;
+		}
+		
+		.navbar-inverse .navbar-brand {
+			color: white;
+		}
+		table {
+			/*white-space: nowrap;*/
+			font-size: smaller;
+		
+		}
+		.btn-info {
+			/*background-color: #f68a1f;*/
+		}
+		
+		@media (min-width: 768px) { 
+			.row {
+		
+				padding-left: 200px;
+		
+			}
+			#tarea {
+			
+			width: 75% !important;
+			
+			}
+		}
+	</style>
+   </head>
+   <body>
+   <div id = "wrapper">
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="SOWtool.html">SOW Generator</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="SOWtool.html">Legacy</a></li>
+					<li><a href="#" onclick="alert('LE 2.0. SOW Generator: Coming soon');">LE 2.0</a></li>
+				</ul>
+			</div>
+		</div>
+		
+
+	<div class ="collapse navbar-collapse navbar-ex1-collapse">
+	  <ul class = "nav navbar-nav side-nav">
+	  <li class = "active">
+      <table class="table table-bordered">
+         <tr>
+            <td><b>
+               Package Type
+            </td></b>
+            <td>
+               <select class="selectpicker" id="package">
+                  <option value="Basic">Basic</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+               </select>
+            </td>
+         </tr>
+		 <tr><td><b>Implementation Type</b></td><td>
+			<select class="selectpicker" id="itype">
+                  <option value="New">New</option>
+                  <option value="Expansion">Expansion</option>
+			</select></td>
+		</tr>
+		 <tr><td><b>Channels</b></td></tr>
+		 <tr><td>Chat</td>
+		 <td><input class="checkbox" type="checkbox" id="chat" checked></td></tr>
+		 <tr><td>Voice</td>
+		 <td><input class="checkbox" type="checkbox" id="voice"></td></tr>
+		 <tr><td>Mobile</td>
+		 <td><input class="checkbox" type="checkbox" id="mobile"></td></tr>
+		 <tr><td></td><td>
+		 <input class="checkbox" type="checkbox" id="ios"/> IOS Native App
+		 <br><input class="checkbox" type="checkbox" id="android"/> Android Native App	
+		 <br><input class="checkbox" type="checkbox" id="resp"/> Responsive/m.site
+		 </td>
+		 </tr>
+		 <tr><td>Content</td>
+		 <td><input class="checkbox" type="checkbox" id="content"></td></tr>
+		 <tr><td>Content: Number of offers</td>
+		 <td><div id = "d0"></div></td></tr>
+		 <tr><td><b>SSO</b></td><td>
+			<select class="selectpicker" id="sso">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+			</select></td>
+		</tr>
+		<tr><td>SSO Type</td><td>
+			<select class="selectpicker" id="ssotype">
+                  <option value="Server to Server">Server to Server</option>
+                  <option value="Enveloped">Enveloped</option>
+				  <option value="SAML">SAML</option>
+			</select>
+			</td>
+		 </tr>
+		 <tr><td><b>Company Website</b></td></tr>
+         <tr>
+            <td>Number of Domains</td>
+            <td>
+				<div id = "i1"></div>
+            </td>
+		 </tr>
+		 <tr>
+			<td></td>
+			<td><button class="btn btn-info btn-sm" onclick="generateBoxes();">Click for multiple domains</button></td>
+         <tr>
+            <td>LOB</td>
+            <td><input class="form-control" id="lob0" type="text" value="sales"></input>
+			
+         </tr>
+         <tr>
+            <td>Domain url</td>
+            <td><input class="form-control" id="domurl0" type="text" value=".com"></input>
+			
+         </tr>
+		 <tr><td><b>Multiple Domains LOBS and URLs</b></td></tr>
+		 <tr><td id= "eboxes1"></td><td id = "eboxes2"></td</tr>
+		
+		 <tr><td><b>Code Package</b></td></tr>
+         <tr>
+			<td>DRD?<br>Code Package?</td>
+			<td>
+			   <select class="selectpicker" id="drd">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+               </select><br>
+			   <select class="selectpicker" id="cp">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+               </select>
+			 </td>
+		</tr>
+		<tr><td><b>Capabilities</b></td></tr>
+		<tr>
+			<td>Number of LOB</td>
+			<td><div id = "i2"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Report Targets</td>
+			<td><div id = "i3"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Scorecards</td>
+			<td><div id = "i4"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Skills</td>
+			<td><div id = "i5"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Visitor profiles</td>
+			<td><div id = "i6"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Rules</td>
+			<td><div id = "i7"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Dynamic Buttons</td>
+			<td><div id = "i8"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Invitations</td>
+			<td><div id = "i9"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Windows</td>
+			<td><div id = "i10"></div></td>
+		</tr>
+		<tr>
+			<td>Window Branding</td>
+			<td><select class="selectpicker" id="windowbrand">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+               </select></td>
+		</tr>
+		<tr>
+			<td>Number of Survey sets</td>
+			<td><div id = "i11"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Canned Response Sets</td>
+			<td><div id = "i12"></div></td>
+		</tr>
+		<tr>
+			<td>Number of System Msg Sets</td>
+			<td><div id = "i13"></div></td>
+		</tr>
+		<tr>
+			<td>PIT?</td>
+			<td>
+			<select class="selectpicker" id="pit">
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+            </select>
+			</td>
+		</tr>
+		<tr><td><b>Testing</b></td></tr>
+		<tr>
+			<td>Number of Testing Calls</td>
+			<td><div id = "i20"></div></td>
+		</tr>
+		<tr><td><b>Training</b></td></tr>
+		<tr>
+			<td>Agent Training Type</td>
+			<td>
+			<select class="selectpicker" id="train">
+					<option value="remote">remote</option>
+					<option value="sura">sura</option>
+					<option value="none">none</option>
+            </select>
+			</td>
+		</tr>
+		<tr>
+			<td>Number of Agent Trainings</td>
+			<td><div id = "i14"></div></td>
+		</tr>
+		<tr>
+			<td>Admin Training</td>
+			<td>
+			<select class="selectpicker" id="atrain">
+					<option value="remote">remote</option>
+					<option value="none">none</option>
+            </select>
+			</td>
+		</tr>
+		<tr>
+			<td>Number of Admin Trainings</td>
+			<td><div id = "i21"></div></td>
+		</tr>
+		<tr><td><b>Project Management</b></td></tr>
+		<tr>
+			<td>Number of Weekly Project Meetings</td>
+			<td><div id = "i15"></div></td>
+		</tr>
+		<tr>
+			<td>Preferred Meeting Length</td>
+			<td><select class="selectpicker" id="pml">
+					<option value="30 minute">30 minute</option>
+					<option value="1 hour">1 hour</option>
+            </select></td>
+		</tr>
+		<tr><td><b>Optimization</b></td></tr>
+		<tr>
+			<td>Number of Post launch meetings</td>
+			<td><div id = "i16"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Scorecard Reviews</td>
+			<td><div id = "i17"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Staffing Calculator Reviews</td>
+			<td><div id = "i18"></div></td>
+		</tr>
+		<tr>
+			<td>Number of Agent Effectivness Reviews</td>
+			<td><div id = "i19"></div></td>
+		</tr>
+		<tr><td><b>Hours</b></td></tr>
+		<tr>
+			<td>Number of Hours</td>
+			<td><input class="form-control" id="hrs" type="text" value="50"></input></td>
+		</tr>
+      </table>
+	  </li>
+	  </ul>
+	  </div>
+	</nav>
+	  <div id = "page-wrapper">
+	  <div id = "r-container" class="container-fluid">
+      <div id="page-content" class = "row">
+	      <div class="col-lg-12">
+                        
+         <section id="tarea" contenteditable="true">
+		 
+            <b>Generated SOW</b>
+         </section>
+		 </div>
+      </div>
+	  
+	  <div id ="container" class = "row">
+	  <div class="col-lg-12">
+                     <button class = "btn btn-info btn-sm" onclick="makeSOW();">Generate</button><button class = "btn btn-info btn-sm" onclick="wordSOW();">Word</button>
+	    </div>
+	  </div>
+	  <br><br><br>
+	  <div class="row">
+	  <div class="col-lg-3 col-md-6">
+		   Feedback: <a href="https://docs.google.com/a/liveperson.com/forms/d/1oqpsaYUyBSpjAQOdgcG9_KWw0K1oYjp4GRD0W23zhtU/viewform?c=0&amp;w=1" rel="nofollow" target="_blank">SOW Generator Form</a>
+		<br>Email: <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=cgarrido@liveperson.com" rel="nofollow" target="_blank">Christian Garrido</a>
+		   </div>
+	  </div>
+	  </div>
+	  </div>
+	  </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	  <script type="text/javascript" src="bootstrap.min.js"></script>
+	  <script type="text/javascript" src="bootstrap-select.min.js"></script>
+      <script src="jquery-2.1.1.min.js"></script>
+      <script src="FileSaver.js"></script>
+      <script src="jquery.wordexport.js"></script>
+	  <style>
+		
+		#tarea {
+			overflow-y: scroll;
+			overflow-x: hidden;
+			height:75%;
+			width:100%;
+			font-family: Arial;
+			font-size: 12px;
+		}
+		/*#r-container {
+			float: left;
+			width: 50%;
+			z-index: 1;
+			position: relative;
+			display:table-cell;
+		
+		
+		}*/
+		
+		/*#r-maincontainer {
+			float: right;
+			width: 50%;
+			z-index: 1;
+			position: relative;
+			display:table-cell;
+		
+		
+		}*/
+		/*.ftable {
+			width: 30%;
+			z-index: 1;
+			position: relative;
+			display:table-cell;
+		    padding-right: 20%;
+
+		
+		}*/
+		/*
+		#container {
+			float: left;
+			height:10%;
+			width: 10%;
+			font-family: Arial;
+			font-size: 0.750em;
+			position: relative;
+		}*/
+		
+		
+		
+		ul, dl {
+			margin-top:0.0in;
+			
+		}
+		
+		#dl{
+		
+			margin-left: 25;
+			margin-bottom: 0;
+		}
+		
+
+		
+	  </style>
+<script type="text/javascript">
+/*$(window).on('scroll', function () {
+    var scrollPos = $(document).scrollTop();
+	var scrollBottom = scrollPos + $('#container').height();
+    $('#tarea').css({
+        top: scrollPos
+    });		
+	$('#container').css({
+        top: scrollPos
+    });	
+}).scroll();*/
+
+</script>
+   </body>
+</html>
