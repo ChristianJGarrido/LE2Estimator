@@ -36,7 +36,7 @@ var mins = [30,
 			30, 10, 30, 30, 60, 180, 60, 60, 30, 60, 300, 300
 			];
 
-var sc = [1,0,0,1,1,1, -1, -1, 1, -1, 1, 1, 1, 1, 3
+var sc = [1,0,0,1,1,1, -1, -1, 1, 1, 1, 1, 1, 1, 3
 			];
 
 function initData() {
@@ -60,10 +60,10 @@ function initTable(dataArray) {
 			var b = 'B'+row;
 			var formula = "=(" + c + "*" + b + ")/60";
 			var scope;
-			if(row == 8 || row == 9 || row == 11) {
+			if(row == 8 || row == 9 ) {
 				scope = "=(c4)";
-				if(row == 11)
-				formula = "=if(C4<6,1,((C11*B11) / 60))";
+				//if(row == 11)
+				//formula = "=if(C4<6,1,((C11*B11) / 60))";
 			}
 			else {
 				scope = sc[i-1];
@@ -174,7 +174,7 @@ function updateSOW() {
 	else {
 		$('#numtrain')[0].selectedIndex = hot.getDataAtCell(11,2);
 		$('#numatrain')[0].selectedIndex = hot.getDataAtCell(12,2);
-		//$('#tcalls')[0].selectedIndex = hot.getDataAtCell(11,2);
+		$('#tcalls')[0].selectedIndex = hot.getDataAtCell(10,2);
 		$('#numpm')[0].selectedIndex = hot.getDataAtCell(15,2);
 		$('#numplm')[0].selectedIndex = hot.getDataAtCell(13,2);
 		$('#hrs')[0].value = getTotalHRS(1, 15);
@@ -208,8 +208,7 @@ function getTotalHRS(k, j) {
 		var min = parseInt(hot.getDataAtCell(i, 1));
 		
 		if(isNaN(scope)) {scope = parseInt(hot.getDataAtCell(3, 2));}
-		if(scope < 6 && i == 10) {sum += 1;}
-		else{sum += (scope * min)/60;}
+		sum += (scope * min)/60;
 		
 		//alert(sum +' ' + i);
 	}

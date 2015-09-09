@@ -673,7 +673,7 @@ function migration() {
 	$('#pit').attr('disabled',true);
 	$('#ssotype').attr('disabled',true);
 	$('#numlob').attr('disabled',true);
-	//$('#busrules').attr('disabled',true);
+	$('#tcalls').attr('disabled',true);
 	$('#campaigns').attr('disabled',true);
 	$('#engagements').attr('disabled',true);
 	$('#numtrain').attr('disabled',true);
