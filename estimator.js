@@ -71,7 +71,7 @@ function initTable(dataArray) {
 			data.push([dataArray[i-1].item,dataArray[i-1].minutes,scope, formula,"", ""]);
 		}
 		data.push(["", "", "Total", "=SUM(D2:D"+ (len+1) + ")", 250, "=D"+max+"*E"+max+""]);
-		data.push(["Extraneous Project Management", 300, "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
+		data.push(["Extraneous Project Management", "", "", "=(D"+max+"*E"+(max+1)+")+D"+(max), 0.3, "=(F"+max+"*E"+(max+1)+")+F"+max]);
 		data.push(["", "", "", "", "", ""]);
 		data.push(["", "", "Project Quote", "=D"+(max+1), "", "=F"+(max+1)]);
 		data.push(["","","","","",""]);
@@ -167,7 +167,7 @@ function updateSOW() {
 		else {
 			$('#pit')[0].selectedIndex = '0';
 		}
-		$('#hrs')[0].value = getTotalHRS(22, 33);
+		$('#hrs')[0].value = getTotalHRS(22, 33, parseFloat(hot.getDataAtCell(35,4)));
 		
 	
 	}
@@ -177,7 +177,7 @@ function updateSOW() {
 		$('#tcalls')[0].selectedIndex = hot.getDataAtCell(10,2);
 		$('#numpm')[0].selectedIndex = hot.getDataAtCell(15,2);
 		$('#numplm')[0].selectedIndex = hot.getDataAtCell(13,2);
-		$('#hrs')[0].value = getTotalHRS(1, 15);
+		$('#hrs')[0].value = getTotalHRS(1, 15, parseFloat(hot.getDataAtCell(17,4)));
 		
 	}
 	/*
@@ -199,7 +199,7 @@ function updateSOW() {
 
 }
 
-function getTotalHRS(k, j) {
+function getTotalHRS(k, j, pad) {
 	var sum = 0;
 	for(var i=k;i <= j; i++) {
 	
@@ -212,7 +212,7 @@ function getTotalHRS(k, j) {
 		
 		//alert(sum +' ' + i);
 	}
-	var padding = .3 * sum;
+	var padding = pad * sum;
 	//alert(sum);
 	sum = sum + padding;
 	//alert(sum);
